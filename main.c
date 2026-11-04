@@ -73,6 +73,8 @@ void getUserName(char *name, size_t buf_size) {
   if (!fgets(name, buf_size, stdin)) {
     printf("Error on name input");
   }
+  // Remove new line character after user pressed Enter
+  name[strlen(name) - 1] = '\0';
 }
 
 int getUserMove() {
@@ -87,8 +89,6 @@ int main(void) {
   char name[PLAYERS_NAME_BYTES];
   printf("Enter your name: ");
   getUserName(name, PLAYERS_NAME_BYTES);
-  // Remove new line character after user pressed Enter
-  name[strlen(name) - 1] = '\0';
 
   char *players[2];
 
