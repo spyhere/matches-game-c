@@ -68,12 +68,16 @@ struct Arr calculateFibNumbers(struct Arr arr, int target) {
   return arr;
 }
 
+void getUserName(char *name, size_t buf_size) {
+  if (!fgets(name, buf_size, stdin)) {
+    printf("Error on name input");
+  }
+}
+
 int main(void) {
   char name[PLAYERS_NAME_BYTES];
   printf("Enter your name: ");
-  if (!fgets(name, sizeof(name), stdin)) {
-    printf("Error on name input");
-  }
+  getUserName(name, PLAYERS_NAME_BYTES);
   // Remove new line character after user pressed Enter
   name[strlen(name) - 1] = '\0';
 
