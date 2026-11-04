@@ -18,7 +18,7 @@ char COMPUTER_NAME[9]          = "Computer\0";
 int main(void) {
   char name[PLAYERS_NAME_BYTES];
   printf("Enter your name: ");
-  getUserName(name, PLAYERS_NAME_BYTES);
+  get_user_name(name, PLAYERS_NAME_BYTES);
 
   char *players[2];
 
@@ -50,11 +50,11 @@ int main(void) {
       sleep(1);
     } else {
       printf("Availabe %d matches (%d total). Your move: ", can_take, matches);
-      move = getUserMove();
+      move = get_user_move();
       while (move <= 0 || move > can_take) {
         printf("Check your input, You can only take from %d to %d matches!\nYou decided to take: ",
                1, can_take);
-        move = getUserMove();
+        move = get_user_move();
       }
     }
     matches -= move;
@@ -69,6 +69,6 @@ int main(void) {
   printf("\nGame over\n");
   printf("%s wins\n", players[player_idx]);
   printf("Initial amount of matches: %d\n", init_matches);
-  printMoves(players, moves, init_matches);
+  print_moves(players, moves, init_matches);
   return 0;
 }

@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void getUserName(char *name, size_t buf_size) {
+void get_user_name(char *name, size_t buf_size) {
   if (!fgets(name, buf_size, stdin)) {
     printf("Error on name input");
   }
@@ -12,7 +12,7 @@ void getUserName(char *name, size_t buf_size) {
   name[strlen(name) - 1] = '\0';
 }
 
-int getUserMove() {
+int get_user_move() {
   char input[4];
   if (!fgets(input, 4, stdin)) {
     return -1;
@@ -20,7 +20,7 @@ int getUserMove() {
   return atoi(input);
 }
 
-void printMoves(char **players, Arr moves, int init_matches) {
+void print_moves(char **players, Arr moves, int init_matches) {
   struct Arr str_buf = new_arr(128, ARR_STR);
   int player_idx     = 0;
   int remains        = init_matches;
