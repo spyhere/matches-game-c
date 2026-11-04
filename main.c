@@ -40,7 +40,7 @@ int main(void) {
   while (1) {
     int can_take = fmin(prev_move * 2, fmin(matches, init_matches - 1));
     if (matches - can_take == 0) {
-      moves = push_arr(moves, (NEW_ARR_VALUE){.i = can_take});
+      moves = push_arr(moves, (ARR_VALUE){.i = can_take});
       break;
     }
     int move;
@@ -58,7 +58,7 @@ int main(void) {
       }
     }
     matches -= move;
-    moves = push_arr(moves, (NEW_ARR_VALUE){.i = move});
+    moves = push_arr(moves, (ARR_VALUE){.i = move});
     if (matches == 0) {
       break;
     }

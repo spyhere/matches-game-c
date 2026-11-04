@@ -73,7 +73,7 @@ struct Arr push_arr_str(struct Arr arr, char *element) {
   return arr;
 }
 
-struct Arr push_arr(struct Arr arr, NEW_ARR_VALUE element) {
+struct Arr push_arr(struct Arr arr, ARR_VALUE element) {
   switch (arr.type) {
   case ARR_INT:
     arr = push_arr_int(arr, element.i);

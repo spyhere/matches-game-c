@@ -20,9 +20,9 @@ typedef struct Arr {
 typedef union {
   int i;
   char *str;
-} NEW_ARR_VALUE;
+} ARR_VALUE;
 
 struct Arr new_arr(int capacity, ARR_TYPE type);
-struct Arr push_arr(struct Arr arr, NEW_ARR_VALUE element);
+struct Arr push_arr(struct Arr arr, ARR_VALUE element);
 
 #endif

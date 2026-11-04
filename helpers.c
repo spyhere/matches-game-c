@@ -29,11 +29,11 @@ void print_moves(char **players, Arr moves, int init_matches) {
     remains -= cur_move;
     char cur_str[48];
     sprintf(cur_str, "%s %d(%d)", players[player_idx], cur_move, remains);
-    str_buf = push_arr(str_buf, (NEW_ARR_VALUE){.str = cur_str});
+    str_buf = push_arr(str_buf, (ARR_VALUE){.str = cur_str});
     if (player_idx == 0 && i != moves.len - 1) {
-      str_buf = push_arr(str_buf, (NEW_ARR_VALUE){.str = " - "});
+      str_buf = push_arr(str_buf, (ARR_VALUE){.str = " - "});
     } else {
-      str_buf = push_arr(str_buf, (NEW_ARR_VALUE){.str = "\n"});
+      str_buf = push_arr(str_buf, (ARR_VALUE){.str = "\n"});
     }
     player_idx = (player_idx + 1) % 2;
   }

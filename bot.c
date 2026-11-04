@@ -7,7 +7,7 @@ struct Arr calculateFibNumbers(struct Arr arr, int target) {
   int a = 1;
   int b = 1;
   while (b <= target) {
-    arr     = push_arr(arr, (NEW_ARR_VALUE){.i = b});
+    arr     = push_arr(arr, (ARR_VALUE){.i = b});
     int tmp = b;
     b       = b + a;
     a       = tmp;
