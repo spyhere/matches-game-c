@@ -3,4 +3,9 @@ project(matches_game_c C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(matches_game_c main.c)
+add_executable(matches_game_c
+arr.c
+bot.c
+helpers.c
+main.c
+)
