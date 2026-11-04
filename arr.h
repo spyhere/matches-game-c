@@ -2,14 +2,27 @@
 #define ARR_H
 #include <stdlib.h>
 
+typedef enum {
+  ARR_INT,
+  ARR_STR,
+} ARR_TYPE;
+
 typedef struct Arr {
-  int *p;
+  union {
+    int *ip;
+    char *cp;
+  } p;
   size_t len;
   size_t capacity;
+  ARR_TYPE type;
 } Arr;
 
-struct Arr new_arr(int capacity);
-struct Arr push_arr(struct Arr arr, int element);
-void print_arr(struct Arr arr);
+typedef union {
+  int i;
+  char *str;
+} NEW_ARR_VALUE;
+
+struct Arr new_arr(int capacity, ARR_TYPE type);
+struct Arr push_arr(struct Arr arr, NEW_ARR_VALUE element);
 
 #endif

@@ -18,7 +18,7 @@ struct Arr calculateFibNumbers(struct Arr arr, int target) {
   int a = 1;
   int b = 1;
   while (b <= target) {
-    arr     = push_arr(arr, b);
+    arr     = push_arr(arr, (NEW_ARR_VALUE){.i = b});
     int tmp = b;
     b       = b + a;
     a       = tmp;
@@ -42,10 +42,10 @@ int main(void) {
   sleep(1);
   printf("%d matches for this game. First move goes to %s\n", init_matches, players[0]);
 
-  struct Arr fibs = new_arr(16);
+  struct Arr fibs = new_arr(16, ARR_INT);
   fibs            = calculateFibNumbers(fibs, init_matches);
 
-  struct Arr moves = new_arr(16);
+  struct Arr moves = new_arr(16, ARR_INT);
 
   player_idx    = 0;
   int matches   = init_matches;
@@ -53,7 +53,7 @@ int main(void) {
   while (1) {
     int can_take = fmin(prev_move * 2, fmin(matches, init_matches - 1));
     if (matches - can_take == 0) {
-      moves = push_arr(moves, can_take);
+      moves = push_arr(moves, (NEW_ARR_VALUE){.i = can_take});
       break;
     }
     printf("%s move\n", players[player_idx]);
@@ -65,7 +65,7 @@ int main(void) {
       move = getUserMove();
     }
     matches -= move;
-    moves = push_arr(moves, move);
+    moves = push_arr(moves, (NEW_ARR_VALUE){.i = move});
     if (matches == 0) {
       break;
     }
