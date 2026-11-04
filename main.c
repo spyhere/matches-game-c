@@ -25,7 +25,7 @@ int main(void) {
   printf("Shuffle...\n");
   srand(time(NULL));
   int init_matches                    = (rand() % MATCHES_MAX + MATCHES_START_OFFSET);
-  int player_idx                      = (rand() % 2);
+  size_t player_idx                   = (rand() % 2);
   players[player_idx]                 = name;
   players[++player_idx % MAX_PLAYERS] = COMPUTER_NAME;
   sleep(1);

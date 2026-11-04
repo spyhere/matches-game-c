@@ -1,4 +1,5 @@
 #include "arr.h"
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -37,7 +38,7 @@ struct Arr push_arr_int(struct Arr arr, int element) {
       printf("Couldn't allocate new array size %zu\n", new_capacity);
       return arr;
     }
-    for (int i = 0; i < arr.len; ++i) {
+    for (size_t i = 0; i < arr.len; ++i) {
       new_p[i] = arr.p.ip[i];
     }
     free(arr.p.ip);
@@ -58,7 +59,7 @@ struct Arr push_arr_str(struct Arr arr, char *element) {
       printf("Couldn't allocate new array size %zu\n", new_capacity);
       return arr;
     }
-    for (int i = 0; i < arr.len; ++i) {
+    for (size_t i = 0; i < arr.len; ++i) {
       new_p[i] = arr.p.cp[i];
     }
     free(arr.p.cp);
