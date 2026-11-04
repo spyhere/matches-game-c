@@ -1,4 +1,5 @@
 #include "arr.h"
+#include "bot.h"
 #include "helpers.h"
 #include <math.h>
 #include <stddef.h>
@@ -13,18 +14,6 @@ const int MATCHES_START_OFFSET = 11;
 const int MATCHES_MAX          = 19; // there can be from 0 to 19 matches
 const int MAX_PLAYERS          = 2;
 char COMPUTER_NAME[9]          = "Computer\0";
-
-struct Arr calculateFibNumbers(struct Arr arr, int target) {
-  int a = 1;
-  int b = 1;
-  while (b <= target) {
-    arr     = push_arr(arr, (NEW_ARR_VALUE){.i = b});
-    int tmp = b;
-    b       = b + a;
-    a       = tmp;
-  }
-  return arr;
-}
 
 int main(void) {
   char name[PLAYERS_NAME_BYTES];
@@ -42,9 +31,7 @@ int main(void) {
   sleep(1);
   printf("%d matches for this game. First move goes to %s\n", init_matches, players[0]);
 
-  struct Arr fibs = new_arr(16, ARR_INT);
-  fibs            = calculateFibNumbers(fibs, init_matches);
-
+  Bot bot          = new_bot(init_matches);
   struct Arr moves = new_arr(16, ARR_INT);
 
   player_idx    = 0;
@@ -56,13 +43,19 @@ int main(void) {
       moves = push_arr(moves, (NEW_ARR_VALUE){.i = can_take});
       break;
     }
-    printf("%s move\n", players[player_idx]);
-    printf("Availabe %d matches (%d total). Your move: ", can_take, matches);
-    int move = getUserMove();
-    while (move <= 0 || move > can_take) {
-      printf("Check your input, You can only take from %d to %d matches!\n You decided to take: ",
-             1, can_take);
+    int move;
+    if (players[player_idx] == COMPUTER_NAME) {
+      move = fmin(get_bot_move(bot, matches), can_take);
+      printf("Availabe %d matches (%d total). ...Computer takes %d\n", can_take, matches, move);
+      sleep(1);
+    } else {
+      printf("Availabe %d matches (%d total). Your move: ", can_take, matches);
       move = getUserMove();
+      while (move <= 0 || move > can_take) {
+        printf("Check your input, You can only take from %d to %d matches!\nYou decided to take: ",
+               1, can_take);
+        move = getUserMove();
+      }
     }
     matches -= move;
     moves = push_arr(moves, (NEW_ARR_VALUE){.i = move});
@@ -72,6 +65,7 @@ int main(void) {
     prev_move  = move;
     player_idx = (player_idx + 1) % 2;
   }
+
   printf("\nGame over\n");
   printf("%s wins\n", players[player_idx]);
   printf("Initial amount of matches: %d\n", init_matches);
