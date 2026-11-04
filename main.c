@@ -72,7 +72,9 @@ int main(void) {
     prev_move  = move;
     player_idx = (player_idx + 1) % 2;
   }
-  printf("Game over\n");
+  printf("\nGame over\n");
   printf("%s wins\n", players[player_idx]);
+  printf("Initial amount of matches: %d\n", init_matches);
+  printMoves(players, moves, init_matches);
   return 0;
 }
