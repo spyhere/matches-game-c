@@ -1,3 +1,4 @@
+#include <math.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -74,6 +75,14 @@ void getUserName(char *name, size_t buf_size) {
   }
 }
 
+int getUserMove() {
+  char input[4];
+  if (!fgets(input, 4, stdin)) {
+    return -1;
+  }
+  return atoi(input);
+}
+
 int main(void) {
   char name[PLAYERS_NAME_BYTES];
   printf("Enter your name: ");
@@ -94,7 +103,35 @@ int main(void) {
 
   struct Arr fibs = new_arr(16);
   fibs            = calculateFibNumbers(fibs, init_matches);
-  print_arr(fibs);
 
+  struct Arr moves = new_arr(16);
+
+  player_idx    = 0;
+  int matches   = init_matches;
+  int prev_move = matches;
+  while (1) {
+    int can_take = fmin(prev_move * 2, fmin(matches, init_matches - 1));
+    if (matches - can_take == 0) {
+      moves = push_arr(moves, can_take);
+      break;
+    }
+    printf("%s move\n", players[player_idx]);
+    printf("Availabe %d matches (%d total). Your move: ", can_take, matches);
+    int move = getUserMove();
+    while (move <= 0 || move > can_take) {
+      printf("Check your input, You can only take from %d to %d matches!\n You decided to take: ",
+             1, can_take);
+      move = getUserMove();
+    }
+    matches -= move;
+    moves = push_arr(moves, move);
+    if (matches == 0) {
+      break;
+    }
+    prev_move  = move;
+    player_idx = (player_idx + 1) % 2;
+  }
+  printf("Game over\n");
+  printf("%s wins\n", players[player_idx]);
   return 0;
 }
