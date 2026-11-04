@@ -92,9 +92,9 @@ int main(void) {
   sleep(1);
   printf("%d matches for this game. First move goes to %s\n", init_matches, players[0]);
 
-  struct Arr arr = new_arr(10);
-  arr            = calculateFibNumbers(arr, init_matches);
-  print_arr(arr);
+  struct Arr fibs = new_arr(16);
+  fibs            = calculateFibNumbers(fibs, init_matches);
+  print_arr(fibs);
 
   return 0;
 }
