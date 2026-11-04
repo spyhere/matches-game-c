@@ -3,9 +3,14 @@ project(matches_game_c C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(matches_game_c
-arr.c
-bot.c
-helpers.c
-main.c
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+file(GLOB SOURCES CONFIGURE_DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c"
+)
+
+add_executable(matches-game-c ${SOURCES})
+
+target_include_directories(matches-game-c PRIVATE
+    "${CMAKE_CURRENT_SOURCE_DIR}/headers"
 )
