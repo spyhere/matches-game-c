@@ -1,4 +1,5 @@
 #include "arr.h"
+#include "helpers.h"
 #include <math.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -23,22 +24,6 @@ struct Arr calculateFibNumbers(struct Arr arr, int target) {
     a       = tmp;
   }
   return arr;
-}
-
-void getUserName(char *name, size_t buf_size) {
-  if (!fgets(name, buf_size, stdin)) {
-    printf("Error on name input");
-  }
-  // Remove new line character after user pressed Enter
-  name[strlen(name) - 1] = '\0';
-}
-
-int getUserMove() {
-  char input[4];
-  if (!fgets(input, 4, stdin)) {
-    return -1;
-  }
-  return atoi(input);
 }
 
 int main(void) {
