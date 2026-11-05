@@ -6,7 +6,8 @@
 
 void get_user_name(char *name, size_t buf_size) {
   if (!fgets(name, buf_size, stdin)) {
-    printf("Error on name input");
+    fprintf(stderr, "Error on name input");
+    return;
   }
   // Remove new line character after user pressed Enter
   name[strlen(name) - 1] = '\0';

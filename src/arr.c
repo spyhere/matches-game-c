@@ -17,11 +17,11 @@ struct Arr new_arr(int capacity, ARR_TYPE type) {
     a.p.cp = p;
     break;
   default:
-    printf("Unrecognised array type\n");
+    fprintf(stderr, "Unrecognised array type\n");
     return a;
   }
   if (p == NULL) {
-    printf("Couldn't allocate array of size %d\n", capacity);
+    fprintf(stderr, "Couldn't allocate array of size %d\n", capacity);
     return a;
   }
   a.len      = 0;
@@ -35,7 +35,7 @@ struct Arr push_arr_int(struct Arr arr, int element) {
     size_t new_capacity = arr.capacity * 2;
     int *new_p          = malloc(sizeof(int) * new_capacity);
     if (new_p == NULL) {
-      printf("Couldn't allocate new array size %zu\n", new_capacity);
+      fprintf(stderr, "Couldn't allocate new array size %zu\n", new_capacity);
       return arr;
     }
     for (size_t i = 0; i < arr.len; ++i) {
@@ -56,7 +56,7 @@ struct Arr push_arr_str(struct Arr arr, char *element) {
     size_t new_capacity = arr.capacity * 2;
     char *new_p         = malloc(sizeof(char) * new_capacity);
     if (new_p == NULL) {
-      printf("Couldn't allocate new array size %zu\n", new_capacity);
+      fprintf(stderr, "Couldn't allocate new array size %zu\n", new_capacity);
       return arr;
     }
     for (size_t i = 0; i < arr.len; ++i) {
