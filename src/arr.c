@@ -59,16 +59,12 @@ struct Arr push_arr_str(struct Arr arr, char *element) {
       fprintf(stderr, "Couldn't allocate new array size %zu\n", new_capacity);
       return arr;
     }
-    for (size_t i = 0; i < arr.len; ++i) {
-      new_p[i] = arr.p.cp[i];
-    }
+    strncpy(new_p, arr.p.cp, arr.len);
     free(arr.p.cp);
     arr.p.cp     = new_p;
     arr.capacity = new_capacity;
   }
-  for (size_t i = 0; i < chunk_len; ++i) {
-    arr.p.cp[i + arr.len] = element[i];
-  }
+  strncpy(arr.p.cp + arr.len, element, chunk_len);
   arr.len += chunk_len;
   return arr;
 }
