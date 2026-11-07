@@ -35,7 +35,7 @@ cmake --build build
 4. Run the application
 
 ```bash
-./build/matches_game_c
+./build/matches-game-c
 ```
 
 ### Example:
