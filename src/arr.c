@@ -33,15 +33,11 @@ struct Arr new_arr(int capacity, ARR_TYPE type) {
 struct Arr push_arr_int(struct Arr arr, int element) {
   if (arr.len + 1 >= arr.capacity) {
     size_t new_capacity = arr.capacity * 2;
-    int *new_p          = malloc(sizeof(int) * new_capacity);
+    int *new_p          = realloc(arr.p.ip, new_capacity * sizeof(int));
     if (new_p == NULL) {
       fprintf(stderr, "Couldn't allocate new array size %zu\n", new_capacity);
       exit(EXIT_FAILURE);
     }
-    for (size_t i = 0; i < arr.len; ++i) {
-      new_p[i] = arr.p.ip[i];
-    }
-    free(arr.p.ip);
     arr.p.ip     = new_p;
     arr.capacity = new_capacity;
   }
@@ -54,13 +50,11 @@ struct Arr push_arr_str(struct Arr arr, char *element) {
   int chunk_len = strlen(element);
   if (arr.len + chunk_len >= arr.capacity) {
     size_t new_capacity = arr.capacity * 2;
-    char *new_p         = malloc(sizeof(char) * new_capacity);
+    char *new_p         = realloc(arr.p.cp, new_capacity * sizeof(char));
     if (new_p == NULL) {
       fprintf(stderr, "Couldn't allocate new array size %zu\n", new_capacity);
       exit(EXIT_FAILURE);
     }
-    strncpy(new_p, arr.p.cp, arr.len);
-    free(arr.p.cp);
     arr.p.cp     = new_p;
     arr.capacity = new_capacity;
   }
